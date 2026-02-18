@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LitFlick - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="#" class="logo">LitFlick</a>
+        </div>
+
+        <div class="nav-center">
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar títulos, géneros...">
+                <button class="search-btn">🔍</button>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <nav class="nav-links">
+                <a href="#foryou" class="active">For You</a>
+                <a href="#movies">Movies</a>
+                <a href="#books">Books</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-login">Login</button>
+                <button class="btn btn-register">Register</button>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="main-container">
+
+        <section class="hero-carousel-container">
+            <button class="hero-arrow left-arrow" onclick="moveHeroSlide(-1)">&#10094;</button>
+
+            <div class="hero-slider" id="heroSlider">
+
+                <div class="hero-slide active">
+                    <div class="hero-image-container">
+                        <img src="assets/dunne2_movie.jpg" alt="Dune Part Two">
+                    </div>
+                    <div class="hero-info">
+                        <h1>Dune: Part Two - Epic</h1>
+                        <div class="meta-info">
+                            <span>Sci-Fi</span> | <span class="rating">★ 8.4</span>
+                        </div>
+                        <p class="description">Paul Atreides unites with Chani and the Fremen while seeking revenge
+                            against the conspirators who destroyed his family.</p>
+                    </div>
+                </div>
+
+                <div class="hero-slide">
+                    <div class="hero-image-container">
+                        <img src="assets/oppenheimer_movie.jpg" alt="Oppenheimer">
+                    </div>
+                    <div class="hero-info">
+                        <h1>Oppenheimer</h1>
+                        <div class="meta-info">
+                            <span>Drama - History</span> | <span class="rating">★ 8.2</span>
+                        </div>
+                        <p class="description">The story of American scientist J. Robert Oppenheimer and his role in the
+                            development of the atomic bomb.</p>
+                    </div>
+                </div>
+
+                <div class="hero-slide">
+                    <div class="hero-image-container">
+                        <img src="assets/projecthailmary_book.jpg" alt="Project Hail Mary">
+                    </div>
+                    <div class="hero-info">
+                        <h1>Project Hail Mary</h1>
+                        <div class="meta-info">
+                            <span>Sci-Fi Book</span> | <span class="rating">★ 9.6</span>
+                        </div>
+                        <p class="description">Ryland Grace is the sole survivor on a desperate, last-chance mission—and
+                            if he fails, humanity and the earth itself will perish.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="hero-arrow right-arrow" onclick="moveHeroSlide(1)">&#10095;</button>
+
+            <div class="hero-dots">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </section>
+
+
+        <section class="content-row">
+            <h2 class="row-title">Our Recommendations</h2>
+            <div class="row-scroller">
+                <div class="media-card">
+                    <div class="badge">★ 9.2</div>
+                    <img src="assets/inception_movie.jpg" alt="Inception">
+                    <h3>Inception (Movie)</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 8.8</div>
+                    <img src="assets/dune_book.jpg" alt="Dune(Book)">
+                    <h3>Dune (Book)</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 7.5</div>
+                    <img src="assets/interstellar_movie.jpg" alt="Interstellar">
+                    <h3>Interstellar (Movie)</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 9.0</div>
+                    <img src="assets/1984_book.jpg" alt="1984">
+                    <h3>1984 (Book)</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 9.4</div>
+                    <img src="assets/alien_movie.jpg" alt="Alien">
+                    <h3>Alien (Movie)</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-row">
+            <h2 class="row-title">Trending Movies</h2>
+            <div class="row-scroller">
+                <div class="media-card">
+                    <div class="badge">★ 8.2</div>
+                    <img src="assets/Oppenheimer_movie.jpg" alt="Oppenheimer">
+                    <h3>Oppenheimer</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 7.9</div>
+                    <img src="assets/barbie_movie.jpg" alt="Barbie">
+                    <h3>Barbie</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 9.8</div>
+                    <img src="assets/spiderverse_movie.jpg" alt="Spider-Verse">
+                    <h3>Spider-Verse</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 7.2</div>
+                    <img src="assets/wonka_movie.jpg" alt="Wonka">
+                    <h3>Wonka</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 7.8</div>
+                    <img src="assets/jurassicpark_movie.jpg" alt="Jurassik Park">
+                    <h3>Jurassik Park</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-row">
+            <h2 class="row-title">Best of Books</h2>
+            <div class="row-scroller">
+                <div class="media-card">
+                    <div class="badge">★ 9.4</div>
+                    <img src="assets/projecthailmary_book.jpg" alt="Project Hail Mary">
+                    <h3>Project Hail Mary</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 8.9</div>
+                    <img src="assets/thehobbit_book.jpg" alt="The Hobbit">
+                    <h3>The Hobbit</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 9.2</div>
+                    <img src="assets/aspaceodyssey_book.jpg" alt="A Space Odyssey">
+                    <h3>A Space Odyssey</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 8.7</div>
+                    <img src="assets/foundation_book.jpg" alt="Foundation">
+                    <h3>Foundation</h3>
+                </div>
+                <div class="media-card">
+                    <div class="badge">★ 8.7</div>
+                    <img src="assets/iceandfire_book.jpg" alt="World of Ice and Fire">
+                    <h3>World of Ice and Fire</h3>
+                </div>
+
+            </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <div class="footer-col">
+                <a href="#" class="logo footer-logo">LitFlick</a>
+                <p class="footer-desc">
+                    Your ultimate destination to discover, rate, and organize the best stories, whether on the big
+                    screen or on paper.
+                </p>
+                <div class="social-icons">
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Twitter/X</a>
+                    <a href="#" class="social-link">Discord</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="#foryou">For You</a></li>
+                    <li><a href="#movies">Movies</a></li>
+                    <li><a href="#books">Books</a></li>
+                    <li><a href="#">Curated Lists</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Contact / Help</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col newsletter-col">
+                <h3>Stay Updated</h3>
+                <p>Get the best weekly recommendations sent to your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button type="button">Subscribe</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 LitFlick Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

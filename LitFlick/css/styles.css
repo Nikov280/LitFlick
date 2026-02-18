@@ -1,0 +1,652 @@
+/* --- VARIABLES GLOBALES (Colores y temas) --- */
+:root {
+    --bg-main: #141414;       /* Fondo muy oscuro (estilo Netflix) */
+    --bg-secondary: #1f1f1f;  /* Fondo para navbar o tarjetas */
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --accent-color: #8a2be2;  /* Violeta vibrante */
+    --rating-yellow: #ffd700; /* Color de estrella */
+    --nav-height: 70px;
+}
+
+/* --- RESET BÁSICO --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif; /* Usando la fuente importada o una genérica */
+    overflow-x: hidden; /* Evita scroll horizontal no deseado en toda la página */
+}
+
+/* ================= NAVBAR STYLES ================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(20, 20, 20, 0.95); /* Fondo semi-transparente */
+    padding: 0 4%; /* Padding lateral para que no se pegue a los bordes */
+    height: var(--nav-height);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+}
+
+/* Logo con gradiente */
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-decoration: none;
+    background: linear-gradient(135deg, #ffffff 30%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+/* Buscador Centrado */
+.nav-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid #333;
+    border-radius: 50px;
+    padding: 8px 15px;
+    width: 100%;
+    max-width: 400px; /* Ancho máximo del buscador */
+}
+
+.search-bar input {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    flex-grow: 1;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+/* Contenedor de la parte derecha del navbar */
+.nav-right {
+    display: flex;
+    align-items: center;
+    /* Quitamos el gap aquí para controlar mejor con márgenes específicos */
+}
+
+/* El contenedor de los enlaces (For You, Movies, Books) */
+.nav-links {
+    display: flex;           /* Para alinearlos horizontalmente */
+    gap: 30px;               /* ESPACIO entre cada enlace (Más aire) */
+    margin-right: 40px;      /* ESPACIO grande entre 'Books' y el botón 'Login' */
+}
+
+/* Estilo de cada enlace individual */
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary); /* Gris claro */
+    font-weight: 500;
+    font-size: 1rem;         /* Un poco más grande para que se lea bien */
+    position: relative;      /* Necesario para el efecto de la línea animada */
+    transition: color 0.3s ease;
+    padding: 5px 0;          /* Un poco de padding vertical */
+}
+
+/* Efecto Hover (al pasar el mouse) y Active */
+.nav-links a:hover, .nav-links a.active {
+    color: var(--text-primary); /* Se vuelve blanco brillante */
+}
+
+/* --- EFECTO DE LÍNEA ANIMADA (Toque profesional) --- */
+/* Crea una línea invisible debajo del texto */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;                /* Empieza con ancho 0 (invisible) */
+    height: 2px;             /* Grosor de la línea */
+    bottom: 0;               /* Posición abajo */
+    left: 0;
+    background-color: var(--accent-color); /* Tu color violeta */
+    transition: width 0.3s ease; /* Animación suave */
+}
+
+/* Cuando pasas el mouse, la línea crece al 100% del ancho */
+.nav-links a:hover::after, 
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* Botones Login/Register */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-login {
+    background: transparent;
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+}
+
+.btn-login:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.btn-register {
+    background-color: var(--accent-color);
+    border: none;
+    color: white;
+}
+
+.btn-register:hover {
+    background-color: #7214c7;
+}
+
+/* ================= MAIN CONTENT STYLES ================= */
+.main-container {
+    padding-bottom: 50px;
+}
+
+/* --- HERO CAROUSEL GRANDE --- */
+.hero-carousel-container {
+    position: relative;
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+    background-color: var(--bg-main);
+    /* --- AÑADE ESTO --- */
+    margin-bottom: 80px; /* Ajusta este valor (80px o 100px) según qué tan separado lo quieras */
+}
+/* 2. Unificamos el estilo de los slides */
+.hero-slide {
+    display: none; /* Oculto por defecto */
+    width: 100%;
+    height: 100%; /* Ocupa el 100% de los 550px del padre */
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3. Solo el activo usa Flex */
+.hero-slide.active {
+    display: flex;
+}
+
+/* 4. Aseguramos que la imagen NO se salga del contenedor */
+.hero-image-container {
+    flex: 1.5;
+    height: 100%; 
+    overflow: hidden;
+}
+
+.hero-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Esto es vital para que no se deforme */
+    object-position: center center;
+}
+
+/* Un degradado sobre la imagen para que el texto se lea mejor en los bordes */
+.hero-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: linear-gradient(to right, rgba(20,20,20,0) 60%, rgba(20,20,20,1) 100%);
+}
+
+
+/* Contenedor del texto (derecha) */
+.hero-info {
+    flex: 1;
+    padding: 40px;
+    /* Evita que el texto crezca más que el contenedor */
+    max-height: 100%; 
+    overflow-y: auto; 
+}
+
+.hero-info h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    line-height: 1.1;
+}
+
+.meta-info {
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.meta-info .rating {
+    color: var(--rating-yellow);
+    margin-left: 10px;
+}
+
+.description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 500px;
+}
+
+/* Flechas del carrusel */
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 20px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s;
+}
+.hero-arrow:hover { background-color: rgba(0,0,0,0.8); }
+.left-arrow { left: 0; }
+.right-arrow { right: 0; }
+
+/* Puntos de navegación inferiores */
+.hero-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #777;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.dot.active, .dot:hover {
+    background-color: var(--accent-color);
+}
+
+
+/* --- SECCIONES VERTICALES (Filas de contenido) --- */
+.content-row {
+    max-width: 1200px;
+    margin: auto;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 0 4%; /* Mismo padding lateral que el navbar */
+}
+
+.row-title {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Contenedor con scroll horizontal */
+.row-scroller {
+    display: flex;
+    gap: 20px; /* Espacio entre tarjetas */
+    overflow-x: auto; /* Permite el scroll horizontal */
+    padding-bottom: 20px; /* Espacio para la barra de scroll */
+    scroll-behavior: smooth;
+    /* Ocultar la barra de scroll fea en Chrome/Safari */
+    scrollbar-width: none; /* Firefox */
+    flex-wrap: nowrap;
+    flex: 0 0 auto;
+    margin: 0 auto;
+    width: fit-content
+
+
+}
+.row-scroller::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+
+
+/* --- TARJETAS INDIVIDUALES (Cards) --- */
+.media-card {
+    /* Tamaño fijo para las tarjetas */
+    min-width: 200px;
+    max-width: 200px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.media-card:hover {
+    transform: scale(1.05); /* Efecto zoom ligero al pasar el mouse */
+    z-index: 5;
+}
+
+.media-card img {
+    width: 100%;
+    height: 300px; /* Altura fija para uniformidad */
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.media-card h3 {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    /* Cortar texto si es muy largo con puntos suspensivos */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Insignia de rating */
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,0,0,0.8);
+    color: var(--rating-yellow);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* --- RESPONSIVE BÁSICO --- */
+@media (max-width: 768px) {
+    .navbar { padding: 0 20px; }
+    .nav-center, .nav-links { display: none; } /* Simplificar navbar en móvil */
+    
+    /* En móvil, el hero stackea la info debajo de la imagen */
+    .hero-carousel-container { height: auto; }
+    .hero-slide.active { flex-direction: column; }
+    .hero-image-container { height: 300px; width: 100%; flex: none; }
+    .hero-info { padding: 20px; width: 100%; flex: none; }
+    .hero-info h1 { font-size: 2rem; }
+    .hero-arrow { padding: 10px; }
+
+    /* Tarjetas más pequeñas en móvil */
+    .media-card { min-width: 140px; max-width: 140px; }
+    .media-card img { height: 210px; }
+}
+
+
+
+/* ================= FOOTER STYLES ================= */
+.site-footer {
+    background-color: var(--bg-secondary);
+    padding: 60px 0 20px 0;
+    margin-top: 60px;
+    border-top: 1px solid #333;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* Columns */
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Specific style for Brand column */
+.footer-col:first-child {
+    flex: 1.5; 
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 15px;
+    /* Uses the existing gradient logic */
+    background: linear-gradient(135deg, #ffffff 30%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-desc {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 300px;
+}
+
+.footer-col h3 {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a, .social-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover, .social-link:hover {
+    color: var(--accent-color);
+    transform: translateX(5px); /* Small movement effect */
+}
+
+/* Social Icons Area */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+/* Newsletter Form */
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background-color: var(--bg-main);
+    color: white;
+    font-family: inherit;
+}
+
+.newsletter-form button {
+    padding: 12px;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.newsletter-form button:hover {
+    background-color: #7214c7;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+/* Responsive Footer (Add to media queries if needed) */
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .footer-col, .footer-col:first-child {
+        width: 100%;
+        flex: none;
+    }
+}
+
+
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+    min-width: 0; /* 🔥 evita overflow en flex */
+}
+
+.hero-info,
+.description {
+    min-width: 0;
+}
+
+
+/* =========================================
+   MEDIA QUERIES (RESPONSIVE DESIGN)
+   Pegar esto al final de tu archivo styles.css
+   ========================================= */
+
+/* --- TABLETS (Pantallas medianas hasta 1024px) --- */
+@media screen and (max-width: 1024px) {
+    .nav-links {
+        gap: 15px;
+        margin-right: 20px;
+    }
+    .logo {
+        font-size: 1.5rem;
+    }
+    .search-bar {
+        max-width: 250px;
+    }
+    .hero-carousel-container {
+        height: 450px;
+    }
+    .hero-info h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* --- MÓVILES (Pantallas pequeñas hasta 768px) --- */
+@media screen and (max-width: 768px) {
+    /* 1. Navbar simplificado */
+    .navbar {
+        padding: 0 15px;
+    }
+    .nav-center, .nav-links {
+        display: none; /* Oculta menú y buscador */
+    }
+    .auth-buttons .btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    /* 2. Hero Section (Imagen arriba, texto abajo) */
+    .hero-carousel-container {
+        height: auto;
+        background-color: var(--bg-main);
+    }
+    .hero-slide.active {
+        flex-direction: column;
+    }
+    .hero-image-container {
+        width: 100%;
+        height: 250px;
+        flex: none;
+    }
+    .hero-info {
+        width: 100%;
+        padding: 20px 15px;
+        text-align: center;
+        flex: none;
+    }
+    .hero-info h1 {
+        font-size: 1.8rem;
+    }
+    .hero-arrow {
+        top: 25%; /* Flechas sobre la imagen */
+        padding: 10px;
+    }
+
+    /* 3. Arreglo del Scroll de Tarjetas */
+    .row-scroller {
+        width: 100%;
+        justify-content: flex-start; /* Alinea a la izquierda para poder hacer scroll */
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .content-row {
+        padding: 0;
+    }
+    
+    .row-title {
+        padding-left: 20px;
+        text-align: left;
+    }
+
+    /* 4. Tarjetas más pequeñas */
+    .media-card {
+        min-width: 140px;
+        max-width: 140px;
+    }
+    .media-card img {
+        height: 210px;
+    }
+}
